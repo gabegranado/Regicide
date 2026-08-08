@@ -3,6 +3,8 @@ dist/
 dist-ssr/
 *.log
 *.local
+.env
+!.env.example
 *.tsbuildinfo
 .DS_Store
 .vscode/*

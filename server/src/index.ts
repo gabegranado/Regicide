@@ -36,7 +36,7 @@ import {
     canAffordDefense} from "./game.js";
 
 const PORT = Number(process.env.PORT) || 3001;
-const CLIENT_ORIGIN = "http://localhost:5173";
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:5173";
 const VALID_SLOTS: PlayerSlot[] = ["player1", "player2"];
 
 const app = express();
