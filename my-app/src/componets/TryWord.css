@@ -1,0 +1,73 @@
+.try-word {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.try-word-boxes {
+  display: flex;
+  gap: 8px;
+}
+
+.try-word-box {
+  width: 48px;
+  height: 48px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+}
+
+.try-word-box--correct {
+  background: #6aaa64;
+  border-color: #6aaa64;
+  color: #fff;
+}
+.try-word-box--present {
+  background: #c9b458;
+  border-color: #c9b458;
+  color: #fff;
+}
+.try-word-box--absent {
+  background: #787c7e;
+  border-color: #787c7e;
+  color: #fff;
+}
+
+.try-word-enter {
+  height: 48px;
+  padding: 0 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-h);
+  background: var(--accent-bg);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+
+  &:hover:not(:disabled) {
+    border-color: var(--accent-border);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.try-word-enter--hidden {
+  visibility: hidden;
+}
