@@ -48,6 +48,10 @@ interface HandUpdatedPayload {
     hand: CardProps[];
 }
 
+interface DefenseRequiredPayload {
+    amount: number;
+}
+
 interface GameStatusPayload {
     ok: boolean;
     gameStatus: GameStatus;
@@ -66,7 +70,6 @@ type ActionResult =
 
 function Regicide() {
     const [hand, setHand] = useState<CardProps[]>([]);
-    const [castleDeck, setCastleDeck] = useState<CardProps[]>([]);
     const [opponentHandSize, setOpponentHandSize] = useState(0);
     const [mySlot, setMySlot] = useState<PlayerSlot | null>(null);
     const [currentTurn, setCurrentTurn] = useState<PlayerSlot | null>(null);
@@ -94,7 +97,6 @@ function Regicide() {
     useEffect(() => {
         const handleGameStart = (payload: GameStartPayload) => {
             setHand(payload.hand);
-            setCastleDeck(payload.castleDeck);
             setOpponentHandSize(payload.opponentHandSize);
             setMySlot(payload.yourSlot);
             setCurrentTurn(payload.currentTurn);
@@ -130,9 +132,9 @@ function Regicide() {
             console.log("PAYLOAD TEST ", payload);
             setTopCastleCard(payload.card);
         }
-        const handleIsDefending = (payload: number) => {
+        const handleIsDefending = (payload: DefenseRequiredPayload) => {
             setIsDefending(true);
-            setCastleAttackValue(payload);
+            setCastleAttackValue(payload.amount);
         }
         const handleHandUpdated = (payload: HandUpdatedPayload) => {
             setHand(payload.hand);
@@ -152,7 +154,6 @@ function Regicide() {
         const handleGameEnded = () => {
             localStorage.removeItem(RECONNECT_KEY);
             setHand([]);
-            setCastleDeck([]);
             setOpponentHandSize(0);
             setMySlot(null);
             setCurrentTurn(null);
@@ -341,6 +342,7 @@ function Regicide() {
                     defendingCards={defendingCards}
                     setDefendingCards={setDefendingCards}
                     onDefend={handleDefend}
+                    requiredAmount={castleAttackValue}
             />
             </>);
         }

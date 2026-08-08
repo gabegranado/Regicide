@@ -7,11 +7,15 @@ interface DefendingProps {
     defendingCards: CardProps[];
     setDefendingCards: Dispatch<SetStateAction<CardProps[]>>;
     onDefend: () => void;
+    requiredAmount: number;
 }
 
-function Defending({ playersHand, defendingCards, setDefendingCards, onDefend }: DefendingProps) {
+function Defending({ playersHand, defendingCards, setDefendingCards, onDefend, requiredAmount }: DefendingProps) {
+    const selectedTotal = defendingCards.reduce((sum, card) => sum + card.num, 0);
+
     return (
         <>
+        <p>Discard cards totaling at least {requiredAmount} ({selectedTotal} selected)</p>
         <button
             type="button"
             onClick={onDefend}
