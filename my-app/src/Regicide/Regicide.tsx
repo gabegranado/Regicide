@@ -263,10 +263,10 @@ function Regicide() {
             onClick={handleEndGame}
             style={{
                 position: "fixed",
-                top: "16px",
-                right: "16px",
-                padding: "8px 18px",
-                fontSize: "0.8rem",
+                top: "clamp(8px, 2vw, 16px)",
+                right: "clamp(8px, 2vw, 16px)",
+                padding: "clamp(6px, 1.5vw, 8px) clamp(12px, 3vw, 18px)",
+                fontSize: "clamp(0.7rem, 2vw, 0.8rem)",
                 fontWeight: 700,
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",
@@ -374,7 +374,7 @@ function Regicide() {
         {endGameButton}
         <h1>{myName}</h1>
         {opponentDisconnected && <p>{opponentName} disconnected — waiting for them to reconnect...</p>}
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", alignItems: "flex-start", gap: "32px" }}>
+        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", alignItems: "flex-start", gap: "clamp(12px, 4vw, 32px)" }}>
             <CardPile label="Discard Pile" count={pileCounts.discardDeckCount} />
             <CastleCard card={topCastleCard} remaining={pileCounts.castleDeckCount} />
             <CardPile label="Tavern Pile" count={pileCounts.tavernDeckCount} />
@@ -382,18 +382,18 @@ function Regicide() {
         <h3>Battle</h3>
         {errors.attack && <h4>{errors.attack}</h4>}
         <p>{myName}: {myPlayedCards.length === 0 ? "no cards played yet" : null}</p>
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "8px" }}>
+        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: "8px" }}>
         {
             myPlayedCards.map((card: CardProps, idx: number) => (
-                <Card key={idx} suit={card.suit} num={card.num} health={card.health} attack={card.attack}/>
+                <Card key={idx} suit={card.suit} num={card.num} health={card.health} attack={card.attack} width="clamp(48px, 12vw, 120px)"/>
             ))
         }
         </div>
         <p>{opponentName}: {opponentPlayedCards.length === 0 ? "no cards played yet" : null}</p>
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "center", gap: "8px" }}>
+        <div style={{ display: "flex", flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: "8px" }}>
         {
             opponentPlayedCards.map((card: CardProps, idx: number) => (
-                <Card key={idx} suit={card.suit} num={card.num} health={card.health} attack={card.attack}/>
+                <Card key={idx} suit={card.suit} num={card.num} health={card.health} attack={card.attack} width="clamp(48px, 12vw, 120px)"/>
             ))
         }
         </div>

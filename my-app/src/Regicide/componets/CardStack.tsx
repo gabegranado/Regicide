@@ -14,8 +14,10 @@ function CardStack({ playersHand, selectedCards = [], setSelectedCards, interact
     // A non-interactive hand (not your turn) still fans out, just with a tighter curve --
     // it's not up for selection, so it doesn't need to spread wide enough to click each card.
     const angleStep = interactive ? 20 : 3; // degrees of rotation per card away from center
-    const curveStep = interactive ? 10 : 3; // px pushed down per card away from center
-    const liftAmount = 60; // px a card rises when selected
+    // Both in vw (not px) so the fan's curve and lift shrink right along with the card width
+    // on a narrow phone screen instead of staying a fixed size and looking oversized/clipped.
+    const curveStepVw = interactive ? 0.9 : 0.25; // vw pushed down per card away from center
+    const liftAmountVw = 5; // vw a card rises when selected
 
     // Card width and overlap are both in vw, and overlap is derived from how many cards
     // there are, so the whole fanned hand always adds up to maxTotalVw of the screen --
@@ -42,16 +44,16 @@ function CardStack({ playersHand, selectedCards = [], setSelectedCards, interact
             playersHand.map((card, idx) => {
                 const offset = idx - center;
                 const rotation = offset * angleStep;
-                const lift = Math.abs(offset) * curveStep;
+                const lift = Math.abs(offset) * curveStepVw;
                 const isSelected = interactive && selectedCards.includes(card);
-                const translateY = isSelected ? lift - liftAmount : lift;
+                const translateY = isSelected ? lift - liftAmountVw : lift;
 
                 return (
                     <div
                         key={idx}
                         onClick={() => toggleCard(card)}
                         style={{
-                            transform: `rotate(${rotation}deg) translateY(${translateY}px)`,
+                            transform: `rotate(${rotation}deg) translateY(${translateY}vw)`,
                             transformOrigin: "bottom center",
                             marginLeft: idx === 0 ? 0 : `${overlapVw}vw`,
                             boxShadow: "0 4px 10px rgba(0, 0, 0, 0.4)",

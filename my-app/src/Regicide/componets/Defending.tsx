@@ -21,8 +21,8 @@ function Defending({ playersHand, defendingCards, setDefendingCards, onDefend, r
             onClick={onDefend}
             disabled={defendingCards.length === 0}
             style={{
-                padding: "14px 48px",
-                fontSize: "1.1rem",
+                padding: "clamp(10px, 3vw, 14px) clamp(24px, 8vw, 48px)",
+                fontSize: "clamp(0.9rem, 3vw, 1.1rem)",
                 fontWeight: 700,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
