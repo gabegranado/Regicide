@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc -b",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "test": "node --import tsx --test --test-isolation=process --test-force-exit \"test/**/*.test.ts\"",
+    "test:watch": "node --import tsx --test --test-isolation=process --watch \"test/**/*.test.ts\"",
+    "test:coverage": "node --import tsx --test --test-isolation=process --experimental-test-coverage \"test/**/*.test.ts\""
   },
   "dependencies": {
     "cors": "^2.8.6",
@@ -17,6 +20,7 @@
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^26.1.2",
+    "socket.io-client": "^4.8.3",
     "tsx": "^4.23.8",
     "typescript": "^7.0.2"
   }

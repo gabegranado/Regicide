@@ -50,6 +50,10 @@ export interface HandUpdatedPayload {
     hand: CardProps[];
 }
 
+export interface OpponentHandUpdatedPayload {
+    opponentHandSize: number;
+}
+
 export interface GameLostPayload {
     ok: false;
     gameStatus: "lost";

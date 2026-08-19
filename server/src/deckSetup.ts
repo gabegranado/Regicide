@@ -20,6 +20,18 @@ export function getAttackValue(num: number): number {
     return CASTLE_ATTACK_VALUES[num] ?? num;
 }
 
+// Recycled jack/queen/king cards need to shed their castle-combat stats (a much higher
+// attack, and possibly a health left at 0 or negative from the killing blow) before they're
+// playable as a regular hand card again — a face card can reach the tavern deck two ways
+// (an exact kill sends it there directly, or an overkill sends it to discard first and heart
+// power can later reclaim it from there), so both paths need this same reset applied.
+export function resetFaceCardStats(card: CardProps): void {
+    if (card.num <= 10) return;
+    const resetValue = getAttackValue(card.num);
+    card.health = resetValue;
+    card.attack = resetValue;
+}
+
 function getDefenseValue(num: number): number {
     return CASTLE_DEFENSE_VALUES[num] ?? num;
 }
