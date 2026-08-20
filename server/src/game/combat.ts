@@ -41,9 +41,10 @@ export function resolveDefeatedCastleCard(): CardProps | null {
         resetFaceCardStats(defeatedCard);
         getTavernDeck().push(defeatedCard);
     } else {
-        getDiscardDeck().push(...getPlayedCards("player1"), ...getPlayedCards("player2"), defeatedCard);
+        getDiscardDeck().push(defeatedCard);
     }
 
+    getDiscardDeck().push(...getPlayedCards("player1"), ...getPlayedCards("player2"));
     clearPlayedCards();
 
     return castleDeck.length > 0 ? getTopCastleCard() : null;
